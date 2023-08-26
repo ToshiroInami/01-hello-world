@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pizza App</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+  }
+  .container {
+    display: flex;
+  }
+  .menu {
+    flex: 1;
+    padding: 20px;
+    border-right: 1px solid #ccc;
+  }
+  .cart {
+    flex: 1;
+    padding: 20px;
+  }
+  ul {
+    list-style: none;
+    padding: 0;
+  }
+  li {
+    margin-bottom: 10px;
+  }
+</style>
+</head>
+<body>
+  <h1>Pizza Menu</h1>
+  <div class="container">
+    <div class="menu">
+      <h2>Menu</h2>
+      <ul>
+        <li>
+          <strong>Margarita</strong> - $10
+          <button onclick="addToCart('Margarita', 10)">Add to Cart</button>
+        </li>
+        <li>
+          <strong>Pepperoni</strong> - $12
+          <button onclick="addToCart('Pepperoni', 12)">Add to Cart</button>
+        </li>
+        <li>
+          <strong>Hawaiian</strong> - $11
+          <button onclick="addToCart('Hawaiian', 11)">Add to Cart</button>
+        </li>
+        <!-- Add more pizzas here -->
+      </ul>
+    </div>
+    <div class="cart">
+      <h2>Cart</h2>
+      <ul id="cartItems">
+        <!-- Cart items will be displayed here -->
+      </ul>
+      <p id="total">Total: $0</p>
+    </div>
+  </div>
+  <script>
+    const cartItems = [];
+    
+    function addToCart(name, price) {
+      cartItems.push({ name, price });
+      updateCart();
+    }
+    
+    function updateCart() {
+      const cartList = document.getElementById('cartItems');
+      const totalElement = document.getElementById('total');
+      cartList.innerHTML = '';
+      let total = 0;
+      cartItems.forEach(item => {
+        total += item.price;
+        cartList.innerHTML += `<li>${item.name} - $${item.price}</li>`;
+      });
+      totalElement.textContent = `Total: $${total}`;
+    }
+  </script>
+</body>
+</html>
